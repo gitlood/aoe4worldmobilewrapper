@@ -47,4 +47,5 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.converter.gson)
     androidTestImplementation(libs.hilt.android.testing)
+    androidTestImplementation(libs.coroutines.android.test)
 }

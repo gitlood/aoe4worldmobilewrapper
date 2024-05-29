@@ -1,10 +1,11 @@
-package com.example.aoe4worldmobilewrapper.data.player
+package com.example.aoe4worldmobilewrapper.data.gamewithstats
 
 data class Modes(
     val qm_1v1: Qm1v1,
     val qm_2v2: Qm2v2,
     val qm_3v3: Qm3v3,
     val qm_4v4: Qm4v4,
+    val qm_ffa: QmFfa,
     val rm_1v1: Rm1v1,
     val rm_1v1_elo: Rm1v1Elo,
     val rm_2v2_elo: Rm2v2Elo,

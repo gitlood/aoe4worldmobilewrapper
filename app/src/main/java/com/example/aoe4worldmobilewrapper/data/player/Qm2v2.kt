@@ -9,7 +9,7 @@ data class Qm2v2(
     val max_rating: Int,
     val max_rating_1m: Int,
     val max_rating_7d: Int,
-    val rank: Int,
+    val rank: Any,
     val rank_level: Any,
     val rating: Int,
     val streak: Int,

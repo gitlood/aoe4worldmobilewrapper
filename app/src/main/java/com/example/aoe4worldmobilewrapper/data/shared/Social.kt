@@ -1,4 +1,4 @@
-package com.example.aoe4worldmobilewrapper.data.player
+package com.example.aoe4worldmobilewrapper.data.shared
 
 data class Social(
     val instagram: String,
