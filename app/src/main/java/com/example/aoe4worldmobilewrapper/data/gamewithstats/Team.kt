@@ -1,5 +1,8 @@
 package com.example.aoe4worldmobilewrapper.data.gamewithstats
 
+import com.example.aoe4worldmobilewrapper.data.shared.Avatars
+import com.example.aoe4worldmobilewrapper.data.shared.Social
+
 data class Team(
     val avatars: Avatars,
     val civilization: String,

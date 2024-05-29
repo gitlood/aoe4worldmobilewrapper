@@ -1,5 +1,8 @@
 package com.example.aoe4worldmobilewrapper.data.player
 
+import com.example.aoe4worldmobilewrapper.data.shared.Avatars
+import com.example.aoe4worldmobilewrapper.data.shared.Social
+
 data class Player(
     val avatars: Avatars,
     val country: String,
