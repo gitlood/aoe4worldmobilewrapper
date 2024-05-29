@@ -3,8 +3,8 @@ package com.example.aoe4worldmobilewrapper.di
 import com.example.aoe4worldmobilewrapper.data.player.Player
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface PlayerResource {
-    @GET("9705268")
-    suspend fun getMe(): Response<Player>
-}
+    @GET("{playerId}")
+    suspend fun getMe(@Path("playerId") playerId: String): Response<Player> }
