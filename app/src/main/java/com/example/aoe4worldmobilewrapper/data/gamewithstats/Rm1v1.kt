@@ -1,7 +1,7 @@
-package com.example.aoe4worldmobilewrapper.data.player
+package com.example.aoe4worldmobilewrapper.data.gamewithstats
 
-data class Qm1v1(
-    val civilizations: List<Any>,
+data class Rm1v1(
+    val _notice_: String,
     val disputes_count: Int,
     val drops_count: Int,
     val games_count: Int,
@@ -10,9 +10,11 @@ data class Qm1v1(
     val max_rating: Int,
     val max_rating_1m: Int,
     val max_rating_7d: Int,
-    val rank: Any,
-    val rank_level: Any,
+    val previous_seasons: List<PreviousSeason>,
+    val rank: Int,
+    val rank_level: String,
     val rating: Int,
+    val season: Int,
     val streak: Int,
     val win_rate: Double,
     val wins_count: Int

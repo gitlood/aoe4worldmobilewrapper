@@ -1,7 +1,6 @@
-package com.example.aoe4worldmobilewrapper.data.player
+package com.example.aoe4worldmobilewrapper.data.gamewithstats
 
-data class Qm1v1(
-    val civilizations: List<Any>,
+data class Qm4v4(
     val disputes_count: Int,
     val drops_count: Int,
     val games_count: Int,

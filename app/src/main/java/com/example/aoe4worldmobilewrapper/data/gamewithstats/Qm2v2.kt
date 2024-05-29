@@ -1,6 +1,6 @@
-package com.example.aoe4worldmobilewrapper.data.player
+package com.example.aoe4worldmobilewrapper.data.gamewithstats
 
-data class QmFfa(
+data class Qm2v2(
     val disputes_count: Int,
     val drops_count: Int,
     val games_count: Int,
