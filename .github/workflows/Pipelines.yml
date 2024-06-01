@@ -23,7 +23,6 @@ jobs: # groups the jobs to be executed in this workflow
         with:
           website: oracle.com
           release: 17
-          super_secret: ${{ secrets.GOOGLE_MAPS_API_KEY }}
 
       # Allow permissions to make gradle executable - This can removed by adding the gradlew file permission
       # directly into the repository using `git update-index --chmod=+x gradlew`
