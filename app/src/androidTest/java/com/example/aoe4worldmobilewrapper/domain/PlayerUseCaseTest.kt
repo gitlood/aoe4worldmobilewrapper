@@ -1,7 +1,6 @@
-package com.example.aoe4worldmobilewrapper
+package com.example.aoe4worldmobilewrapper.domain
 
-import com.example.aoe4worldmobilewrapper.di.PlayerResource
-import com.example.aoe4worldmobilewrapper.domain.PlayerUseCase
+import com.example.aoe4worldmobilewrapper.di.PlayerApi
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,7 +25,7 @@ class PlayerUseCaseTest {
     var hiltRule = HiltAndroidRule(this)
 
     @Inject
-    lateinit var playerResource: PlayerResource
+    lateinit var playerApi: PlayerApi
 
     @Before
     fun init() {
@@ -35,7 +34,7 @@ class PlayerUseCaseTest {
 
     @Test
     fun getPlayerForMyPlayerIdReturnsMyPlayerInfo() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayer(myPlayerId)
         val player = playerUseCase.player.value
         assertTrue(myPlayerName == player?.name)
@@ -44,14 +43,14 @@ class PlayerUseCaseTest {
 
     @Test
     fun getPlayerReturnsNullWhenInvalidPlayerId() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayer("invalid")
         assertNull(playerUseCase.player.value)
     }
 
     @Test
     fun getPlayersGameForMyPlayerIdReturnsMyAListOfGames() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayersGame(myPlayerId)
         val games = playerUseCase.playersGames.value
         assertTrue(games?.filters?.profile_ids?.first() == myPlayerId.toInt())
@@ -60,14 +59,14 @@ class PlayerUseCaseTest {
 
     @Test
     fun getPlayersGameReturnsNullWhenInvalidPlayerId() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayersGame("invalid")
         assertNull(playerUseCase.playersGames.value)
     }
 
     @Test
     fun getPlayerGameForMyPlayerIdReturnsMyAListOfGames() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayerGame(myPlayerId, gameId)
         val game = playerUseCase.game.value
         assertTrue(game?.game_id.toString() == gameId)
@@ -75,14 +74,14 @@ class PlayerUseCaseTest {
 
     @Test
     fun getPlayerGameReturnsNullWhenInvalidPlayerIdAndGameId() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayerGame("invalid", "invalid")
         assertNull(playerUseCase.playersGames.value)
     }
 
     @Test
     fun getPlayerLastGameWithStatsForMyPlayerIdReturnsGameWithStats() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayerLastGameWithStats(myPlayerId)
         val game = playerUseCase.gameWithStats.value
         assertTrue(game?.ongoing == false)
@@ -90,14 +89,14 @@ class PlayerUseCaseTest {
 
     @Test
     fun getPlayerLastGameWithStatsReturnsNullWhenInvalidPlayerId() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.getPlayerLastGameWithStats("invalid")
         assertNull(playerUseCase.gameWithStats.value)
     }
 
     @Test
     fun searchPlayersForMyPlayerNameReturnMyPlayer() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.searchPlayers(myPlayerName)
         val game = playerUseCase.searchPlayers.value
         assertTrue(game?.players?.first()?.name == myPlayerName)
@@ -106,7 +105,7 @@ class PlayerUseCaseTest {
 
     @Test
     fun searchPlayersReturnsNullWhenInvalidPlayerName() = runTest {
-        val playerUseCase = PlayerUseCase(playerResource)
+        val playerUseCase = PlayerUseCase(playerApi)
         playerUseCase.searchPlayers("3904uv2m0935h8t928m345h298045ht,2-dh2y")
         val game = playerUseCase.searchPlayers.value
         assertTrue(game?.count == 0)

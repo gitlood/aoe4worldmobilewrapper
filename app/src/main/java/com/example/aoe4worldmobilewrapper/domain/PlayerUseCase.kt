@@ -5,7 +5,7 @@ import com.example.aoe4worldmobilewrapper.data.gamewithstats.GameWithStats
 import com.example.aoe4worldmobilewrapper.data.player.Player
 import com.example.aoe4worldmobilewrapper.data.playersgames.PlayersGames
 import com.example.aoe4worldmobilewrapper.data.searchplayers.SearchPlayers
-import com.example.aoe4worldmobilewrapper.di.PlayerResource
+import com.example.aoe4worldmobilewrapper.di.PlayerApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class PlayerUseCase @Inject constructor(
-    private val playerResource: PlayerResource,
+    private val playerApi: PlayerApi,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
 
@@ -34,7 +34,7 @@ class PlayerUseCase @Inject constructor(
     val searchPlayers: StateFlow<SearchPlayers?> get() = _searchPlayers
 
     suspend fun getPlayer(playerId: String) = withContext(dispatcher) {
-        val response = playerResource.getPlayer(playerId)
+        val response = playerApi.getPlayer(playerId)
         if (response.isSuccessful) {
             response.body()?.let { body ->
                 _player.value = body
@@ -53,7 +53,7 @@ class PlayerUseCase @Inject constructor(
         since: String? = null,
         includeAlts: Boolean? = null,
     ) = withContext(dispatcher) {
-        val response = playerResource.getPlayerGames(playerId, page, limit, leaderBoard, opponentProfileId, since, includeAlts)
+        val response = playerApi.getPlayerGames(playerId, page, limit, leaderBoard, opponentProfileId, since, includeAlts)
         if (response.isSuccessful) {
             response.body()?.let { body ->
                 _playersGames.value = body
@@ -68,7 +68,7 @@ class PlayerUseCase @Inject constructor(
         gameId: String,
         includeAlts: Boolean? = null,
     ) = withContext(dispatcher) {
-        val response = playerResource.getPlayerGame(profileId, gameId, includeAlts)
+        val response = playerApi.getPlayerGame(profileId, gameId, includeAlts)
         if (response.isSuccessful) {
             response.body()?.let { body ->
                 _game.value = body
@@ -83,7 +83,7 @@ class PlayerUseCase @Inject constructor(
         includeAlts: Boolean? = null,
         includeStats: Boolean? = null,
     ) = withContext(dispatcher) {
-        val response = playerResource.getPlayerLastGameWithStats(profileId, includeAlts, includeStats)
+        val response = playerApi.getPlayerLastGameWithStats(profileId, includeAlts, includeStats)
         if (response.isSuccessful) {
             response.body()?.let { body ->
                 _gameWithStats.value = body
@@ -98,7 +98,7 @@ class PlayerUseCase @Inject constructor(
         page: Int? = null,
         exact: Boolean? = null,
     ) = withContext(dispatcher) {
-        val response = playerResource.searchPlayers(profileId, page, exact)
+        val response = playerApi.searchPlayers(profileId, page, exact)
         if (response.isSuccessful) {
             response.body()?.let { body ->
                 _searchPlayers.value = body

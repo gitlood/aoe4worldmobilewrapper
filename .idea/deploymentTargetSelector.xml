@@ -14,7 +14,10 @@
       <SelectionState runConfigName="getPlayerForMyPlayerIdReturnsMyPlayerInfo()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="getPlayerReturnsNullWhenInvalidPlayerId()">
+      <SelectionState runConfigName="getLeaderBoardForMyPlayerIdRM_SOLO()">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="LeaderboardUseCaseTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

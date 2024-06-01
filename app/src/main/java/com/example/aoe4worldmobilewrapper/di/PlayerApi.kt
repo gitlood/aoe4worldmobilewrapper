@@ -10,11 +10,11 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface PlayerResource {
-    @GET("{playerId}")
+interface PlayerApi {
+    @GET("v0/players/{playerId}")
     suspend fun getPlayer(@Path("playerId") playerId: String): Response<Player>
 
-    @GET("{profile_id}/games")
+    @GET("v0/players/{profile_id}/games")
     suspend fun getPlayerGames(
         @Path("profile_id") profileId: String,
         @Query("page") page: Int? = null,
@@ -25,7 +25,7 @@ interface PlayerResource {
         @Query("include_alts") includeAlts: Boolean? = null,
     ): Response<PlayersGames>
 
-    @GET("{profile_id}/games/{game_id}")
+    @GET("v0/players/{profile_id}/games/{game_id}")
     suspend fun getPlayerGame(
         @Path("profile_id") profileId: String,
         @Path("game_id") gameId: String,
@@ -33,14 +33,14 @@ interface PlayerResource {
         @Query("api_key") apiKey: String? = null
     ): Response<Game>
 
-    @GET("{profile_id}/games/last")
+    @GET("v0/players/{profile_id}/games/last")
     suspend fun getPlayerLastGameWithStats(
         @Path("profile_id") profileId: String,
         @Query("include_alts") includeAlts: Boolean? = null,
         @Query("include_stats") includeStats: Boolean? = null
     ): Response<GameWithStats>
 
-    @GET("search")
+    @GET("v0/players/search")
     suspend fun searchPlayers(
         @Query("query") query: String,
         @Query("page") page: Int? = null,

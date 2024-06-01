@@ -11,12 +11,12 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object PlayersModule {
+object ApiModule {
 
     @Provides
     @Singleton
     fun providesRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl("https://aoe4world.com/api/v0/players/")
+        .baseUrl("https://aoe4world.com/api/")
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
@@ -28,7 +28,13 @@ object PlayersModule {
 
     @Provides
     @Singleton
-    fun providesPlayerApiService(retrofit: Retrofit): PlayerResource = retrofit.create(
-        PlayerResource::class.java
+    fun providesPlayerApiService(retrofit: Retrofit): PlayerApi = retrofit.create(
+        PlayerApi::class.java
+    )
+
+    @Provides
+    @Singleton
+    fun providesLeaderboardApiService(retrofit: Retrofit): LeaderboardApi = retrofit.create(
+        LeaderboardApi::class.java
     )
 }
