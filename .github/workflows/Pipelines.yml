@@ -23,17 +23,11 @@ jobs: # groups the jobs to be executed in this workflow
         with:
           website: oracle.com
           release: 17
-          super_secret: ${{ secrets.GOOGLE_MAPS_API_KEY }}
 
       # Allow permissions to make gradle executable - This can removed by adding the gradlew file permission
       # directly into the repository using `git update-index --chmod=+x gradlew`
       - name: Make gradle executable
         run: chmod +x ./gradlew
-
-      - name: Update Username from Secrets
-        env:
-          GOOGLE_MAPS_API_KEY: ${{ secrets.GOOGLE_MAPS_API_KEY }}
-        run: echo GOOGLE_MAPS_API_KEY="$GOOGLE_MAPS_API_KEY" > ./local.properties
 
       # Execute gradle build command with stacktrace flag
       - name: Build with gradle
@@ -50,3 +44,33 @@ jobs: # groups the jobs to be executed in this workflow
         with:
           name: Unit Test Reports
           path: app/build/reports/tests/testDebugUnitTest/
+
+  Ui-tests: #Defines another job called medium UI tests
+    name: 📱 UI Tests
+    needs: [ build ] # This job's execution is dependant on whether `build` job completes successfully
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code # [optional] specifies the name of the step
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 1
+
+      # Setup JDK Version 11 in the runner
+      - name: 'Set up latest Oracle JDK 17'
+        uses: oracle-actions/setup-java@v1
+        with:
+          website: oracle.com
+          release: 17
+
+      - name: Execute UI Tests
+        uses: reactivecircus/android-emulator-runner@v2.28.0
+        with:
+          api-level: 29
+          script: ./gradlew connectedCheck
+
+      - name: Upload Test Reports Folder
+        uses: actions/upload-artifact@v3.1.2
+        if: ${{ always() }} # IMPORTANT: Upload reports regardless of status
+        with:
+          name: UI Test Reports
+          path: app/build/reports/androidTests/connected/ # path to where the xml test results are stored
