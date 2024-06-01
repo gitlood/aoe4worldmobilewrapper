@@ -37,4 +37,16 @@ object ApiModule {
     fun providesLeaderboardApiService(retrofit: Retrofit): LeaderboardApi = retrofit.create(
         LeaderboardApi::class.java
     )
+
+    @Provides
+    @Singleton
+    fun providesGamesApiService(retrofit: Retrofit): GamesApi = retrofit.create(
+        GamesApi::class.java
+    )
+
+    @Provides
+    @Singleton
+    fun providesStatsApiService(retrofit: Retrofit): StatsApi = retrofit.create(
+        StatsApi::class.java
+    )
 }

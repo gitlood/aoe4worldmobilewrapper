@@ -11,13 +11,13 @@
       <SelectionState runConfigName="PlayerUseCaseTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="getPlayerForMyPlayerIdReturnsMyPlayerInfo()">
+      <SelectionState runConfigName="LeaderboardUseCaseTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="getLeaderBoardForMyPlayerIdRM_SOLO()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="LeaderboardUseCaseTest">
+      <SelectionState runConfigName="getGamesFor3Players()">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
