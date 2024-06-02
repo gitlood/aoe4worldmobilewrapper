@@ -1,4 +1,4 @@
-package com.example.aoe4worldmobilewrapper.domain
+package com.example.aoe4worldmobilewrapper.repository
 
 import com.example.aoe4worldmobilewrapper.data.leaderboard.Leaderboard
 import com.example.aoe4worldmobilewrapper.di.LeaderboardApi
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class LeaderboardUseCase @Inject constructor(
+class LeaderboardRepository @Inject constructor(
     private val leaderboardApi: LeaderboardApi,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {

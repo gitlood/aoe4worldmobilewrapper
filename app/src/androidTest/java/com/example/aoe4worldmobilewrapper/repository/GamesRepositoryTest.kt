@@ -1,4 +1,4 @@
-package com.example.aoe4worldmobilewrapper.domain
+package com.example.aoe4worldmobilewrapper.repository
 
 import com.example.aoe4worldmobilewrapper.di.GamesApi
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltAndroidTest
-class GamesUseCaseTest {
+class GamesRepositoryTest {
 
     private val profileIds = listOf(9705268, 7132008, 7245221)
 
@@ -31,11 +31,11 @@ class GamesUseCaseTest {
 
     @Test
     fun getGamesFor3Teams() = runTest {
-        val gamesUseCase = GamesUseCase(gamesApi)
-        gamesUseCase.getGames(
+        val gamesRepository = GamesRepository(gamesApi)
+        gamesRepository.getGames(
            profileIds = profileIds
         )
-        val games = gamesUseCase.games.value
+        val games = gamesRepository.games.value
         Assert.assertTrue(games?.games?.first()?.teams?.size == 2)
     }
 }
