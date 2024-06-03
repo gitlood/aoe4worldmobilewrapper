@@ -91,32 +91,10 @@ jobs: # groups the jobs to be executed in this workflow
             distribution: 'temurin'
             java-version: '17'
 
-        # Not executing build here on MacOS stack (10x costs, if private repository)
-        #- name: Build with Gradle
-        #  run: ./gradlew build
-
         # Add caching to speed up connected tests below (see `actions/android-emulator-runner`)
         - name: Setup Gradle
           uses: gradle/gradle-build-action@v3
 
-        #- name: AVD cache
-        #  uses: actions/cache@v3
-        #  id: avd-cache
-        #  with:
-        #    path: |
-        #      ~/.android/avd/*
-        #      ~/.android/adb*
-        #    key: avd-${{ matrix.api-level }}
-        #- name: Create AVD and generate snapshot for caching
-        #  if: steps.avd-cache.outputs.cache-hit != 'true'
-        #  uses: reactivecircus/android-emulator-runner@v2
-        #  with:
-        #    api-level: ${{ matrix.api-level }}
-        #    force-avd-creation: false
-        #    disable-animations: true
-        #    script: echo "Generated AVD snapshot for caching."
-
-        # From https://github.com/android/nowinandroid/blob/main/.github/workflows/Build.yaml#L142
         - name: Build projects before running emulator
           run: ./gradlew packageDebugAndroidTest
 
@@ -130,15 +108,9 @@ jobs: # groups the jobs to be executed in this workflow
             disable-animations: true
             disk-size: 6000M
             heap-size: 600M
-            # <<<<
-            #force-avd-creation: false
-            #emulator-options: -no-snapshot-save
-            #avd-name: ubuntu-avd-28
-            script: ./gradlew :persistence:connectedDebugAndroidTest :datacapturing:connectedDebugAndroidTest :synchronization:connectedDebugAndroidTest --daemon
-            # To execute a single test class
-            #script: ./gradlew :datacapturing:connectedCyfaceMockDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=de.cyface.datacapturing.DataCapturingServiceTest --daemon
 
-        # From https://github.com/android/nowinandroid/blob/main/.github/workflows/Build.yaml#L142
+            script: ./gradlew :connectedDebugAndroidTest
+
         - name: Upload test reports
           if: always()
           uses: actions/upload-artifact@v4
