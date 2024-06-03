@@ -91,13 +91,6 @@ jobs: # groups the jobs to be executed in this workflow
             distribution: 'temurin'
             java-version: '17'
 
-        - name: Add gradle.properties
-          run: |
-            # Use a personal read token to install the Cyface Utils package
-            cp gradle.properties.template gradle.properties
-            echo "githubUser=${{ secrets.GH_READ_ACCOUNT }}" >> gradle.properties
-            echo "githubToken=${{ secrets.GH_READ_TOKEN }}" >> gradle.properties
-
         # Not executing build here on MacOS stack (10x costs, if private repository)
         #- name: Build with Gradle
         #  run: ./gradlew build
