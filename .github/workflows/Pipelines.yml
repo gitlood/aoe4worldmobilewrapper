@@ -55,9 +55,6 @@ jobs: # groups the jobs to be executed in this workflow
       runs-on: ubuntu-latest
 
       timeout-minutes: 55
-      strategy:
-        matrix:
-          api-level: [ 28 ]
 
       steps:
         - name: Checkout
@@ -79,7 +76,7 @@ jobs: # groups the jobs to be executed in this workflow
         - name: Connected tests
           uses: reactivecircus/android-emulator-runner@v2
           with:
-            api-level: ${{ matrix.api-level }}
+            api-level: 28
             arch: x86_64
             disable-animations: true
             disk-size: 6000M
@@ -91,5 +88,5 @@ jobs: # groups the jobs to be executed in this workflow
           if: always()
           uses: actions/upload-artifact@v4
           with:
-            name: test-reports-${{ matrix.api-level }}
+            name: Ui Test Reports
             path: '**/build/reports/androidTests'
