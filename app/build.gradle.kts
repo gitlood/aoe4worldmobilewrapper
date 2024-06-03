@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     kotlin("kapt")
+    `maven-publish`
 }
 
 android {
@@ -33,6 +34,21 @@ android {
     }
 }
 
+publishing {
+    publications {
+        create<MavenPublication>("mavenJava") {
+          //  from(components["default"])
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/gitlood/aoe4worldmobilewrapper")
+        }
+    }
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -48,4 +64,13 @@ dependencies {
     implementation(libs.converter.gson)
     androidTestImplementation(libs.hilt.android.testing)
     androidTestImplementation(libs.coroutines.android.test)
+}
+
+tasks.register("printComponents") {
+    doLast {
+        println("Available components:")
+        components.forEach { component ->
+            println(component.name)
+        }
+    }
 }
