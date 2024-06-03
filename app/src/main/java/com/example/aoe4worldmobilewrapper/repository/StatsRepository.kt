@@ -105,13 +105,12 @@ class StatsRepository @Inject constructor(
     }
 
     suspend fun getStatMatchupsRM(
-        gameType: GameTypesRM,
         patch: String? = null,
         rankLevel: Int? = null,
         rating: String? = null
     ) = withContext(dispatcher) {
         val response = statsApi.getStatsMatchups(
-            gameType = gameType.name,
+            gameType = GameTypesRM.rm_solo.name,
             patch = patch,
             rankLevel = rankLevel,
             rating = rating
@@ -126,13 +125,12 @@ class StatsRepository @Inject constructor(
     }
 
     suspend fun getStatMatchupsQM(
-        gameType: GameTypesQM,
         patch: String? = null,
         rating: String? = null
     ) = withContext(dispatcher) {
         val response =
             statsApi.getStatsMatchups(
-                gameType = gameType.name,
+                gameType = GameTypesQM.qm_1v1.name,
                 patch = patch,
                 rating = rating
             )
@@ -147,7 +145,7 @@ class StatsRepository @Inject constructor(
 
 
     enum class GameTypesRM {
-        rm_team, rm_solo, rm_2v2, rm_3v3, rm_4v4
+        rm_solo
     }
 
     enum class GameTypesQM {

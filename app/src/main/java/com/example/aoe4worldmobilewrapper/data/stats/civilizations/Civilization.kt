@@ -5,5 +5,6 @@ data class Civilization(
     val leaderboard: String,
     val patch: String,
     val rank_level: Any,
-    val rating: Any
+    val rating: Any,
+    val kind: String
 )
