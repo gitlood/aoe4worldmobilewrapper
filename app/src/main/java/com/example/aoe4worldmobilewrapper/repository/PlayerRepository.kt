@@ -1,4 +1,4 @@
-package com.example.aoe4worldmobilewrapper.domain
+package com.example.aoe4worldmobilewrapper.repository
 
 import com.example.aoe4worldmobilewrapper.data.game.Game
 import com.example.aoe4worldmobilewrapper.data.gamewithstats.GameWithStats
@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class PlayerUseCase @Inject constructor(
+class PlayerRepository @Inject constructor(
     private val playerApi: PlayerApi,
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
